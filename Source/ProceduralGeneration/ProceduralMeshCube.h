@@ -5,42 +5,34 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ProceduralMeshComponent.h"
-#include "ProceduralMesh.generated.h"
+#include "ProceduralMeshCube.generated.h"
 
 UCLASS()
-class PROCEDURALGENERATION_API AProceduralMesh : public AActor
+class PROCEDURALGENERATION_API AProceduralMeshCube : public AActor
 {
 	GENERATED_BODY()
 	
-public:
+public:	
 	// Sets default values for this actor's properties
-	AProceduralMesh();
+	AProceduralMeshCube();
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh Parameters")
-	FVector CubeRaduis = FVector(100.f, 100.f, 100.f);
+		FVector CubeRaduis = FVector(100.f, 100.f, 100.f);
 
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere)
-	USceneComponent* ThisScene;
+		USceneComponent* ThisScene;
 
 	UPROPERTY(VisibleAnywhere)
-	UProceduralMeshComponent* ThisMesh;
+		UProceduralMeshComponent* ThisMesh;
 
 	virtual void PostActorCreated() override;
 	virtual void PostLoad() override;
 
 	void GenerateMesh();
-
-
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 
 private:
 	TArray<FVector> Vertices;
@@ -53,6 +45,9 @@ private:
 
 	void AddTriangleMesh(FVector TopLeft, FVector ButtomLeft, FVector ButtomRight, int32& TriIndex, FProcMeshTangent Tangent);
 	void AddQuadMesh(FVector TopLeft, FVector ButtomLeft, FVector TopRight, FVector ButtomRight, int32& TriIndex, FProcMeshTangent Tangent);
+
+
+
 
 
 };
